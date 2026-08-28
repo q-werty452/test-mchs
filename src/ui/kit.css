@@ -1,0 +1,261 @@
+/* ---------- Панель ---------- */
+.panel {
+  position: relative;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-panel);
+}
+
+.panel--flush { border-radius: 0; border-left: 0; border-right: 0; }
+
+.panel__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  min-height: 42px;
+}
+
+.panel__title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.panel__actions { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+.panel__body { padding: 14px; }
+.panel__body--tight { padding: 0; }
+
+/* Уголки HUD */
+.hud { position: relative; }
+.hud::before, .hud::after {
+  content: '';
+  position: absolute;
+  width: 9px; height: 9px;
+  border: 1px solid var(--line-accent);
+  pointer-events: none;
+}
+.hud::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+.hud::after { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+
+/* ---------- Кнопки ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 12px;
+  height: 30px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.14s, border-color 0.14s, color 0.14s;
+}
+.btn:hover:not(:disabled) { background: var(--bg-hover); border-color: var(--line-strong); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn--primary {
+  background: var(--accent-dim);
+  border-color: var(--line-accent);
+  color: var(--accent);
+}
+.btn--primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+  border-color: var(--line-accent);
+  box-shadow: 0 0 14px var(--accent-dim);
+}
+
+.btn--danger { background: var(--danger-soft); border-color: var(--danger-line); color: var(--danger-text); }
+.btn--danger:hover:not(:disabled) { background: color-mix(in srgb, var(--danger) 18%, transparent); border-color: var(--danger); }
+
+.btn--ghost { background: transparent; border-color: transparent; color: var(--text-dim); }
+.btn--ghost:hover:not(:disabled) { background: var(--bg-elevated); color: var(--text); }
+
+.btn--sm { height: 24px; padding: 0 8px; font-size: 11px; }
+.btn--icon { padding: 0; width: 30px; justify-content: center; }
+.btn--icon.btn--sm { width: 24px; }
+
+/* ---------- Значки ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 7px;
+  border-radius: var(--r-sm);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.badge--dot::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 6px currentColor;
+}
+
+.badge--live::before { animation: blink 1.6s ease-in-out infinite; }
+
+/* ---------- Уровень угрозы ---------- */
+.lvl {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px; height: 20px;
+  border-radius: var(--r-sm);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid currentColor;
+}
+
+.lvl-bar { display: flex; gap: 2px; align-items: flex-end; height: 14px; }
+.lvl-bar span { width: 3px; border-radius: 1px; background: currentColor; opacity: 0.22; }
+.lvl-bar span.on { opacity: 1; }
+
+/* ---------- Таблица ---------- */
+.tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+.tbl th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--bg-panel);
+  text-align: left;
+  padding: 8px 12px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+.tbl td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--line-soft);
+  vertical-align: middle;
+}
+.tbl tbody tr { transition: background 0.12s; }
+.tbl tbody tr:hover { background: var(--bg-elevated); }
+.tbl tbody tr.clickable { cursor: pointer; }
+.tbl tbody tr.selected { background: var(--accent-dim); }
+.tbl .r { text-align: right; }
+
+/* ---------- Поля ---------- */
+.input, .select, .textarea {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 0 10px;
+  height: 30px;
+  transition: border-color 0.14s, background 0.14s;
+}
+.textarea { height: auto; padding: 9px 10px; line-height: 1.6; resize: vertical; font-family: var(--font-mono); font-size: 11.5px; }
+.input:focus, .select:focus, .textarea:focus { outline: none; border-color: var(--line-accent); background: var(--bg-panel); }
+.input::placeholder, .textarea::placeholder { color: var(--text-faint); }
+.select { appearance: none; cursor: pointer; padding-right: 26px; }
+
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field > .label { margin-bottom: 1px; }
+
+/* ---------- Сегменты ---------- */
+.seg { display: inline-flex; background: var(--bg-input); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 2px; gap: 2px; }
+.seg button {
+  background: transparent;
+  border: 0;
+  border-radius: 2px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: background 0.14s, color 0.14s;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.seg button:hover { color: var(--text); }
+.seg button.on { background: var(--bg-hover); color: var(--text); box-shadow: inset 0 0 0 1px var(--line); }
+
+/* ---------- Плитка показателя ---------- */
+.stat {
+  padding: 12px 14px;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+}
+.stat__value { font-family: var(--font-mono); font-size: 24px; font-weight: 600; letter-spacing: -0.03em; line-height: 1; }
+.stat__label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); }
+.stat__foot { font-size: 11px; color: var(--text-dim); display: flex; align-items: center; gap: 5px; }
+.stat__accent { position: absolute; left: 0; top: 0; bottom: 0; width: 2px; }
+
+/* ---------- Прочее ---------- */
+.row { display: flex; align-items: center; gap: 8px; }
+.col { display: flex; flex-direction: column; }
+.spacer { flex: 1; }
+
+.kv { display: grid; grid-template-columns: minmax(120px, 40%) 1fr; gap: 7px 12px; font-size: 12px; }
+.kv dt { color: var(--text-faint); }
+.kv dd { margin: 0; color: var(--text); }
+
+.empty {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; padding: 44px 20px; color: var(--text-faint); text-align: center;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-elevated) 25%, var(--bg-hover) 50%, var(--bg-elevated) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+  border-radius: var(--r-sm);
+}
+@keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+
+.divider { height: 1px; background: var(--line); margin: 12px 0; }
+
+.scroll-y { overflow-y: auto; overflow-x: hidden; }
+
+.tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 6px; font-size: 10.5px;
+  border: 1px solid var(--line); border-radius: 2px;
+  color: var(--text-dim); background: var(--bg-input);
+}
+
+.toast-wrap {
+  position: fixed; bottom: 18px; right: 18px; z-index: 400;
+  display: flex; flex-direction: column; gap: 8px; max-width: 380px;
+}
+.toast {
+  display: flex; gap: 9px; align-items: flex-start;
+  padding: 10px 13px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--line-strong);
+  border-left-width: 2px;
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-float);
+  animation: fade-up 0.22s var(--ease);
+  font-size: 12px;
+}
+.toast--ok { border-left-color: var(--ok); }
+.toast--err { border-left-color: var(--danger); }
+.toast--info { border-left-color: var(--accent); }

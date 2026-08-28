@@ -1,0 +1,29 @@
+import type { AuditEntry } from '../types';
+import { iso, isoDays, seeded, hashCode } from './_util';
+
+const rnd = seeded(hashCode('audit-2026'));
+const rid = () => 'req_' + Math.floor(rnd() * 0xffffffff).toString(16).padStart(8, '0');
+
+export const auditLog: AuditEntry[] = [
+  { id: 'AU-9241', t: iso(-0.2), actor: 'Оператор ОДС Жумабаев А.', role: 'operator', action: 'Просмотр карточки зоны', object: 'Зона риска', object_id: 'Z-SZK-002', ip: '10.24.7.41', result: 'ok', request_id: rid() },
+  { id: 'AU-9240', t: iso(-0.9), actor: 'Абдиев М.', role: 'rayon_mchs', action: 'Изменение статуса действия', object: 'Событие', object_id: 'EV-2026-0184', field: 'actions.A-04.status', old_value: 'pending', new_value: 'in_progress', ip: '10.24.19.8', result: 'ok', request_id: rid() },
+  { id: 'AU-9239', t: iso(-1.4), actor: 'Абдиев М.', role: 'rayon_mchs', action: 'Попытка изменения зоны вне территории', object: 'Зона риска', object_id: 'Z-MLS-002', field: 'level', old_value: '5', new_value: '4', ip: '10.24.19.8', result: 'denied', request_id: rid() },
+  { id: 'AU-9238', t: iso(-1.6), actor: 'Оператор ОДС Осмонова Г.', role: 'operator', action: 'Создание черновика уведомления', object: 'Уведомление', object_id: 'NT-2026-0413', ip: '10.24.7.44', result: 'ok', request_id: rid() },
+  { id: 'AU-9237', t: iso(-2.5), actor: 'м-р Сыдыков К.', role: 'rayon_mchs', action: 'Отметка о выполнении действия', object: 'Событие', object_id: 'EV-2026-0184', field: 'actions.A-06.status', old_value: 'in_progress', new_value: 'done', ip: '10.24.31.12', result: 'ok', request_id: rid() },
+  { id: 'AU-9236', t: iso(-4.2), actor: 'Абдырахманова С.', role: 'akim', action: 'Отметка о выполнении действия', object: 'Событие', object_id: 'EV-2026-0184', field: 'actions.A-03.status', old_value: 'in_progress', new_value: 'done', ip: '10.24.44.6', result: 'ok', request_id: rid() },
+  { id: 'AU-9235', t: iso(-5.1), actor: 'Оператор ОДС Жумабаев А.', role: 'operator', action: 'Запрос к AI-помощнику', object: 'AI', object_id: 'AI-7712', ip: '10.24.7.41', result: 'ok', request_id: rid() },
+  { id: 'AU-9234', t: iso(-6.7), actor: 'ст. л-т Орозов Б.', role: 'rayon_mchs', action: 'Обновление состояния сооружения', object: 'Защитное сооружение', object_id: 'ST-011', field: 'note', old_value: 'Накопительная ёмкость заполнена на 28 %', new_value: 'Накопительная ёмкость заполнена на 35 %, требуется очистка до начала сезона.', ip: '10.24.19.22', result: 'ok', request_id: rid() },
+  { id: 'AU-9233', t: iso(-8.4), actor: 'Начальник смены Сатыбалдиев Э.', role: 'oblast_mchs', action: 'Подтверждение уведомления', object: 'Уведомление', object_id: 'NT-2026-0411', field: 'status', old_value: 'awaiting_approval', new_value: 'approved', ip: '10.24.2.3', result: 'ok', request_id: rid() },
+  { id: 'AU-9232', t: iso(-8.7), actor: 'Оператор ОДС Жумабаев А.', role: 'operator', action: 'Создание черновика уведомления', object: 'Уведомление', object_id: 'NT-2026-0411', ip: '10.24.7.41', result: 'ok', request_id: rid() },
+  { id: 'AU-9231', t: iso(-9.2), actor: 'Начальник смены Сатыбалдиев Э.', role: 'oblast_mchs', action: 'Изменение статуса события', object: 'Событие', object_id: 'EV-2026-0184', field: 'status', old_value: 'monitoring', new_value: 'active', ip: '10.24.2.3', result: 'ok', request_id: rid() },
+  { id: 'AU-9230', t: iso(-13.5), actor: 'Оператор ОДС Жумабаев А.', role: 'operator', action: 'Создание события', object: 'Событие', object_id: 'EV-2026-0184', ip: '10.24.7.41', result: 'ok', request_id: rid() },
+  { id: 'AU-9229', t: iso(-13.8), actor: 'Оператор ОДС Жумабаев А.', role: 'operator', action: 'Изменение уровня угрозы зоны', object: 'Зона риска', object_id: 'Z-SZK-002', field: 'level', old_value: '3', new_value: '4', ip: '10.24.7.41', result: 'ok', request_id: rid() },
+  { id: 'AU-9228', t: iso(-14.2), actor: 'Система', role: 'operator', action: 'Срабатывание правила', object: 'Правило', object_id: 'R-MUD-02', ip: '127.0.0.1', result: 'ok', request_id: rid() },
+  { id: 'AU-9227', t: iso(-19.4), actor: 'Аскаров М.', role: 'akim', action: 'Попытка просмотра служебных ресурсов', object: 'Ресурсы', object_id: 'RU-*', ip: '10.24.44.19', result: 'denied', request_id: rid() },
+  { id: 'AU-9226', t: iso(-22.1), actor: 'Оператор ОДС Осмонова Г.', role: 'operator', action: 'Подтверждение импорта', object: 'Импорт', object_id: 'IMP-2026-0088', field: 'records', old_value: '0', new_value: '214', ip: '10.24.7.44', result: 'ok', request_id: rid() },
+  { id: 'AU-9225', t: isoDays(-1.4), actor: 'Начальник смены Сатыбалдиев Э.', role: 'oblast_mchs', action: 'Изменение параметра правила', object: 'Правило', object_id: 'R-FLD-03', field: 'params.H_warn', old_value: '160', new_value: '150', ip: '10.24.2.3', result: 'ok', request_id: rid() },
+  { id: 'AU-9224', t: isoDays(-2.3), actor: 'Оператор ОДС Осмонова Г.', role: 'operator', action: 'Создание события', object: 'Событие', object_id: 'EV-2026-0183', ip: '10.24.7.44', result: 'ok', request_id: rid() },
+  { id: 'AU-9223', t: isoDays(-2.8), actor: 'Бакиров Д.', role: 'rayon_mchs', action: 'Загрузка документа', object: 'Зона риска', object_id: 'Z-MLS-002', field: 'docs', old_value: '3', new_value: '4', ip: '10.24.51.7', result: 'ok', request_id: rid() },
+  { id: 'AU-9222', t: isoDays(-3.78), actor: 'Начальник смены Сатыбалдиев Э.', role: 'oblast_mchs', action: 'Подтверждение уведомления', object: 'Уведомление', object_id: 'NT-2026-0409', field: 'status', old_value: 'awaiting_approval', new_value: 'approved', ip: '10.24.2.3', result: 'ok', request_id: rid() },
+  { id: 'AU-9221', t: isoDays(-9.2), actor: 'Начальник смены Сатыбалдиев Э.', role: 'oblast_mchs', action: 'Отклонение уведомления', object: 'Уведомление', object_id: 'NT-2026-0405', field: 'status', old_value: 'awaiting_approval', new_value: 'rejected', ip: '10.24.2.3', result: 'ok', request_id: rid() },
+];
